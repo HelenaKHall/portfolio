@@ -1,0 +1,190 @@
+---
+title: "Test 3"
+author: "Helena Hall"
+date: "2025-09-25"
+output: html_document
+---
+
+---
+title: "Business Insights Report"
+subtitle: "Data Visualization and Communication"
+author: "Helena Hall--665374757"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+# Then load the library once (and only once) in your RMD file
+library(ggplot2)
+
+##Data Preparation and Initial Analysis
+```
+
+```{r}
+# Load ggplot2
+library(ggplot2)
+
+# Load the business dataset
+business_data <- read.csv("data/business_performance.csv")
+```
+
+
+# Data preparation and Initial Analysis
+
+```{r}
+# Check the structure of the data
+str(business_data)
+
+# Get a summary of the data
+summary(business_data)
+```
+
+## What type of data are the variables (columns) quarter and and channel?
+
+- Quarter: character (categorical data)
+
+- Channel: character (categorical data)
+
+- Range of revenue values: 150,231 to 412,125
+
+
+```{r}
+# Calculate total revenue by channel
+total_revenue_by_channel <- aggregate(revenue ~ channel, data = business_data, FUN = sum)
+
+# View the results
+total_revenue_by_channel
+```
+
+```{r}
+# Find the channel with the highest total revenue
+total_revenue_by_channel[which.max(total_revenue_by_channel$revenue), ]
+```
+
+
+```{r}
+# Calculate average customers by quarter
+avg_customers_by_quarter <- aggregate(customers ~ quarter, data = business_data, FUN = mean)
+
+# View the results
+avg_customers_by_quarter
+```
+
+```{r}
+# Find the quarter with the highest average customers
+avg_customers_by_quarter[which.max(avg_customers_by_quarter$customers), ]
+```
+
+```{r}
+# Create revenue per customer column
+business_data$revenue_per_customer <- business_data$revenue / business_data$customers
+
+# View the first few rows to check
+head(business_data)
+```
+
+```{r}
+# Calculate average revenue per customer by channel
+avg_rev_per_customer_by_channel <- aggregate(revenue_per_customer ~ channel, 
+                                              data = business_data, 
+                                              FUN = mean)
+
+# View the results
+avg_rev_per_customer_by_channel
+```
+
+```{r}
+# Channel with the highest average revenue per customer
+avg_rev_per_customer_by_channel[which.max(avg_rev_per_customer_by_channel$revenue_per_customer), ]
+```
+
+Business insight:
+
+
+The channel with the highest revenue per customer is generating more revenue from each customer.
+
+
+This can indicate:
+
+
+- Higher-value customers using that channel
+
+
+- More effective sales or upselling strategies
+
+
+- Opportunity to focus marketing or resources on that channel to maximize profits.
+
+
+# Creating Professional Charts
+
+```{r}
+# Calculate totals first
+channel_totals <- aggregate(revenue ~ channel, data = business_data, sum)
+# Then create the chart
+ggplot(channel_totals, aes(x = channel, y = revenue)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Total Revenue by Channel", 
+       x = "Sales Channel", y = "Revenue ($)")
+```
+
+
+## Which channel should receive more investment based on this visualization?
+
+
+The Online channel should receive more investment because it has the highest total revenue
+
+```{r}
+ggplot(business_data, aes(x = customers, y = revenue, color = channel)) +
+  geom_point(size = 3) +
+  labs(title = "Customer Count vs Revenue by Channel",
+       x = "Number of Customers", y = "Revenue ($)")
+```
+
+## Which channel appears most efficient at converting customers to revenue?
+
+
+The online channel has this highest points overall which means it's generating more revenue per customer meaning its more efficient at converting cutomers into revenue
+
+
+
+# Action Plan
+
+```{r}
+# Total revenue by channel
+total_revenue <- aggregate(revenue ~ channel, data = business_data, sum)
+
+# Average customers by channel
+avg_customers <- aggregate(customers ~ channel, data = business_data, mean)
+
+# Average conversion rate by channel
+avg_conversion <- aggregate(conversion_rate ~ channel, data = business_data, mean, na.rm = TRUE)
+
+# Combine into one table
+summary_table <- merge(total_revenue, avg_customers, by = "channel")
+summary_table <- merge(summary_table, avg_conversion, by = "channel")
+
+# Optional: round numbers for readability
+summary_table$customers <- round(summary_table$customers, 0)
+summary_table$conversion_rate <- round(summary_table$conversion_rate, 1)
+
+# View the table
+summary_table
+```
+
+
+
+Invest more in the Online sales channel, which generates the highest total revenue of $5,571,130 and serves an average of 1,560 customers with a solid conversion rate of 3.6%. Focused marketing and resources here can maximize returns. Additionally, consider leveraging Retail strategies to improve conversion efficiency, as it has the highest conversion rate of 5.0% but fewer customers, to boost overall revenue without major new investment.
+
+

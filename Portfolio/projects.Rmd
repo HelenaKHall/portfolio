@@ -1,0 +1,58 @@
+
+---
+title: "My Projects"
+---
+
+## Data Analysis Projects
+
+Here are some of my key projects demonstrating various data analysis skills.
+
+### Project 1: Website Performance Analysis
+
+**Objective:** Analyze website engagement and performance data to identify trends and inform business decisions
+
+**Key Skills:**
+
+- Dataframe creation and manipulation in R
+- Handling missing values (NA)
+- Data visualization with scatter plots and trend lines
+- Correlation analysis and interpretation
+- Communicating insights for business strategy
+
+[View detailed analysis →](project1.html)
+
+---
+
+### Project 2: Regional Sales Performance Report
+
+**Objective:** Import, clean, and analyze sales data to uncover regional trends and support strategic business decisions
+
+**Key Skills:**
+
+- CSV data import and exploration in R
+- Data quality assessment and missing value checks
+- Logical operators for filtering business metrics
+- Aggregating and summarizing revenue and customer data
+- Creating executive-level performance summaries and actionable insights
+
+[View detailed analysis →](project2.html)
+
+---
+
+### Project 3: Business Insights and Channel Performance
+
+**Objective:** Visualize and analyze business performance data to identify high-value channels and inform investment decisions
+
+**Key Skills:**
+
+- CSV data import and preparation in R
+- Aggregating revenue, customers, and conversion metrics
+- Creating new calculated fields (e.g., revenue per customer)
+- Data visualization using ggplot2 (bar charts, scatter plots)
+- Interpreting results to guide business strategy and resource allocation
+
+[View detailed analysis →](project3.html)
+
+---
+
+[← Back to Home](index.html) | [← Back to Projects](projects.html)

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Helena Hall–665374757" />
+
+<meta name="date" content="2025-11-29" />
+
+<title>Business Data Analysis Report</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Portfolio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Business Data Analysis Report</h1>
+<h3 class="subtitle">CSV Import and Data Cleaning</h3>
+<h4 class="author">Helena Hall–665374757</h4>
+<h4 class="date">2025-11-29</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#executive-summary" id="toc-executive-summary"><span
+class="toc-section-number">1</span> Executive Summary</a>
+<ul>
+<li><a href="#question-1-csv-import-and-basic-exploration"
+id="toc-question-1-csv-import-and-basic-exploration"><span
+class="toc-section-number">1.1</span> Question 1: CSV Import and Basic
+Exploration</a></li>
+<li><a href="#question-2-data-quality-assessment"
+id="toc-question-2-data-quality-assessment"><span
+class="toc-section-number">1.2</span> Question 2: Data Quality
+Assessment</a></li>
+<li><a href="#question-3-using-logical-operators-for-business-questions"
+id="toc-question-3-using-logical-operators-for-business-questions"><span
+class="toc-section-number">1.3</span> Question 3: Using Logical
+Operators for Business Questions</a></li>
+<li><a href="#question-4-creating-business-summaries"
+id="toc-question-4-creating-business-summaries"><span
+class="toc-section-number">1.4</span> Question 4: Creating Business
+Summaries</a></li>
+<li><a href="#question-5-executive-summary-creation"
+id="toc-question-5-executive-summary-creation"><span
+class="toc-section-number">1.5</span> Question 5: Executive Summary
+Creation</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="executive-summary" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Executive Summary</h1>
+<div id="question-1-csv-import-and-basic-exploration"
+class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Question 1: CSV
+Import and Basic Exploration</h2>
+<p>Create a sample dataset to simulate importing CSV data:</p>
+<pre class="r"><code># Create sample regional sales data
+regional_sales &lt;- data.frame(
+  region = c(&quot;North&quot;, &quot;South&quot;, &quot;East&quot;, &quot;West&quot;, &quot;North&quot;, &quot;South&quot;, &quot;East&quot;, &quot;West&quot;,
+             &quot;North&quot;, &quot;South&quot;, &quot;East&quot;, &quot;West&quot;, &quot;North&quot;, &quot;South&quot;, &quot;East&quot;, 
+             &quot;North&quot;, &quot;South&quot;,&quot;North&quot;),  
+  quarter = c(rep(c(&quot;Q1&quot;, &quot;Q2&quot;, &quot;Q3&quot;, &quot;Q4&quot;), each = 4), &quot;Q4&quot;, &quot;Q4&quot;),
+  revenue = c(125000, 98000, 115000, 102000, 
+              138000, 105000, 128000, 118000,
+              142000, 89000, 135000, 125000,
+              155000, 112000, 148000, 165000, 
+              120000, 91250),
+  customers = c(450, 380, 420, 395, 
+                485, 415, 465, 445,
+                520, 350, 485, 470,
+                575, 425, 545, 590, 435,324)
+)</code></pre>
+<div id="use-str-to-examine-the-structure-of-your-data."
+class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Use str() to
+examine the structure of your data.</h3>
+<pre class="r"><code>str(regional_sales)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    18 obs. of  4 variables:
+##  $ region   : chr  &quot;North&quot; &quot;South&quot; &quot;East&quot; &quot;West&quot; ...
+##  $ quarter  : chr  &quot;Q1&quot; &quot;Q1&quot; &quot;Q1&quot; &quot;Q1&quot; ...
+##  $ revenue  : num  125000 98000 115000 102000 138000 105000 128000 118000 142000 89000 ...
+##  $ customers: num  450 380 420 395 485 415 465 445 520 350 ...</code></pre>
+<p>How many observations and variables do you have?</p>
+<p>18 observations and 4 variables</p>
+<p>What data types are the variables?</p>
+<p>There are 2 types of variables:</p>
+<p>chr = character/text</p>
+<p>num = numeric (double precision numbers)</p>
+</div>
+<div id="use-head-and-summary-to-explore-the-data-content."
+class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Use head() and
+summary() to explore the data content.</h3>
+<pre class="r"><code>head(regional_sales)</code></pre>
+<pre><code>##   region quarter revenue customers
+## 1  North      Q1  125000       450
+## 2  South      Q1   98000       380
+## 3   East      Q1  115000       420
+## 4   West      Q1  102000       395
+## 5  North      Q2  138000       485
+## 6  South      Q2  105000       415</code></pre>
+<pre class="r"><code>summary(regional_sales)</code></pre>
+<pre><code>##     region            quarter             revenue         customers    
+##  Length:18          Length:18          Min.   : 89000   Min.   :324.0  
+##  Class :character   Class :character   1st Qu.:106750   1st Qu.:416.2  
+##  Mode  :character   Mode  :character   Median :122500   Median :447.5  
+##                                        Mean   :122847   Mean   :454.1  
+##                                        3rd Qu.:137250   3rd Qu.:485.0  
+##                                        Max.   :165000   Max.   :590.0</code></pre>
+<p>What is the range of revenue values?</p>
+<p>89000-165000</p>
+<p>Which region appears in the first few rows?</p>
+<p>The first 4 rows show regions North, South, East and West</p>
+</div>
+<div
+id="use-unique-to-identify-all-unique-regions-and-quarters-in-your-dataset."
+class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Use unique() to
+identify all unique regions and quarters in your dataset.</h3>
+<pre class="r"><code>unique(regional_sales)</code></pre>
+<pre><code>##    region quarter revenue customers
+## 1   North      Q1  125000       450
+## 2   South      Q1   98000       380
+## 3    East      Q1  115000       420
+## 4    West      Q1  102000       395
+## 5   North      Q2  138000       485
+## 6   South      Q2  105000       415
+## 7    East      Q2  128000       465
+## 8    West      Q2  118000       445
+## 9   North      Q3  142000       520
+## 10  South      Q3   89000       350
+## 11   East      Q3  135000       485
+## 12   West      Q3  125000       470
+## 13  North      Q4  155000       575
+## 14  South      Q4  112000       425
+## 15   East      Q4  148000       545
+## 16  North      Q4  165000       590
+## 17  South      Q4  120000       435
+## 18  North      Q4   91250       324</code></pre>
+<p>How many different regions and quarters are represented?</p>
+<p>There are 4 different regions (North, South, East and West) and 3
+quarters represented.</p>
+</div>
+<div
+id="calculate-the-total-number-of-customers-across-all-regions-and-quarters-using-sum."
+class="section level3" number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> Calculate the total
+number of customers across all regions and quarters using sum().</h3>
+<pre class="r"><code>sum(regional_sales$customers)</code></pre>
+<pre><code>## [1] 8174</code></pre>
+<p>What business insight does this total provide?</p>
+<p>This number shows how many customers were served in total in this
+time period. this can be helpful in comparing to previous years or to
+calculate average revenue per customer.</p>
+</div>
+</div>
+<div id="question-2-data-quality-assessment" class="section level2"
+number="1.2">
+<h2><span class="header-section-number">1.2</span> Question 2: Data
+Quality Assessment</h2>
+<div id="check-for-missing-values-using-sumis.naregional_sales"
+class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Check for missing
+values using sum(is.na(regional_sales))</h3>
+<pre class="r"><code>sum(is.na(regional_sales))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>Are there any missing values in this dataset?</p>
+<p>No</p>
+<p>Why is this check important in real business scenarios?</p>
+<p>A missing value can impact the accuracy of decision made within the
+business and also reveal problems such as one area not reporting or a
+messed up POS system.</p>
+</div>
+<div
+id="use-table-to-create-frequency-tables-for-the-region-and-quarter-variables."
+class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Use table() to
+create frequency tables for the region and quarter variables.</h3>
+<pre class="r"><code>table(regional_sales$region, regional_sales$quarter)</code></pre>
+<pre><code>##        
+##         Q1 Q2 Q3 Q4
+##   East   1  1  1  1
+##   North  1  1  1  3
+##   South  1  1  1  2
+##   West   1  1  1  0</code></pre>
+<p>Are the data evenly distributed across regions and quarters?</p>
+<p>All data is evenly distributed throughout region and quarter for
+Quarter 1, 2 &amp;3. In quarter 4, the data is not evenly
+distributed.</p>
+<p>What does this tell you about your business operations?</p>
+<p>This means for the first 3 quarters, the businesses operations were
+steady but in quarter 4 something changed to create an uneven
+distributions such as an expansion, or even gaps in data.</p>
+</div>
+<div
+id="identify-any-potential-data-quality-issues-by-finding-records-where-revenue-is-less-than-90000.-use-logical-operators-to-filter-and-display-these-records-with-regional_salesregional_salesrevenue-90000"
+class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Identify any
+potential data quality issues by finding records where revenue is less
+than <span class="math inline">\(90,000. Use logical operators to filter
+and display these records with
+regional_sales[regional_sales\)</span>revenue &lt; 90000, ]</h3>
+<pre class="r"><code>regional_sales[regional_sales$revenue &lt; 90000, ]</code></pre>
+<pre><code>##    region quarter revenue customers
+## 10  South      Q3   89000       350</code></pre>
+<p>Which region and quarter show concerning performance?</p>
+<p>The South region in the 3rd quarter show just under $90000 of
+revenue.</p>
+</div>
+</div>
+<div id="question-3-using-logical-operators-for-business-questions"
+class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Question 3: Using
+Logical Operators for Business Questions</h2>
+<div
+id="find-all-records-where-revenue-is-greater-than-140000-using-regional_salesregional_salesrevenue-140000"
+class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Find all records
+where revenue is greater than <span class="math inline">\(140,000 using
+regional_sales[regional_sales\)</span>revenue &gt; 140000, ]</h3>
+<pre class="r"><code>regional_sales[regional_sales$revenue &gt; 140000, ]</code></pre>
+<pre><code>##    region quarter revenue customers
+## 9   North      Q3  142000       520
+## 13  North      Q4  155000       575
+## 15   East      Q4  148000       545
+## 16  North      Q4  165000       590</code></pre>
+<p>Which regions and quarters achieved high performance?</p>
+<p>The North region achieved the highest performance in quarters 3 and 4
+and were closely followed by the East region in quarter 4.</p>
+<p>Count how many high-performance records exist using nrow().</p>
+<pre class="r"><code>nrow(regional_sales[regional_sales$revenue &gt; 140000, ])</code></pre>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div
+id="identify-q4-records-with-revenue-greater-than-130000-and-more-than-500-customers-using-the-operator."
+class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Identify “Q4”
+records with revenue greater than $130,000 AND more than 500 customers
+using the &amp; operator.</h3>
+<pre class="r"><code>regional_sales[regional_sales$quarter == &quot;Q4&quot; &amp; 
+               regional_sales$revenue &gt; 130000 &amp; 
+               regional_sales$customers &gt; 500, ]</code></pre>
+<pre><code>##    region quarter revenue customers
+## 13  North      Q4  155000       575
+## 15   East      Q4  148000       545
+## 16  North      Q4  165000       590</code></pre>
+<p>Display these records and explain what this combination tells you
+about year-end performance.</p>
+<p>Quarter 4 shows a high revenue and high customer base showing a
+strong performance especially in the North and East region.</p>
+</div>
+<div
+id="find-records-from-either-the-north-or-east-regions-using-the-operator.-calculate-the-average-revenue-for-these-combined-regions-using-mean."
+class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Find records from
+either the “North” OR “East” regions using the | operator. Calculate the
+average revenue for these combined regions using mean().</h3>
+<pre class="r"><code>mean(regional_sales$revenue[regional_sales$region == &quot;North&quot; | 
+                            regional_sales$region == &quot;East&quot;])</code></pre>
+<pre><code>## [1] 134225</code></pre>
+<p>How does this compare to the overall average revenue?</p>
+<p>The average overall revenue was $122847. The average revenue of just
+the North and East regions is higher than the overall average
+revenue.</p>
+</div>
+<div
+id="create-a-business-performance-flag-by-identifying-records-that-have-either-revenue-below-100000-or-fewer-than-400-customers."
+class="section level3" number="1.3.4">
+<h3><span class="header-section-number">1.3.4</span> Create a business
+performance flag by identifying records that have EITHER revenue below
+$100,000 OR fewer than 400 customers.</h3>
+<pre class="r"><code>underperform_flag &lt;- regional_sales$revenue &lt; 100000 | 
+                     regional_sales$customers &lt; 400</code></pre>
+<pre class="r"><code>regional_sales[regional_sales$performance_flag == TRUE, ]</code></pre>
+<pre><code>## [1] region    quarter   revenue   customers
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<p>Count these concerning records and calculate what percentage of your
+total records they represent.</p>
+<pre class="r"><code>sum(regional_sales$performance_flag)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>sum(regional_sales$performance_flag) / nrow(regional_sales) * 100</code></pre>
+<pre><code>## [1] 0</code></pre>
+</div>
+</div>
+<div id="question-4-creating-business-summaries" class="section level2"
+number="1.4">
+<h2><span class="header-section-number">1.4</span> Question 4: Creating
+Business Summaries</h2>
+<div
+id="use-aggregate-to-calculate-total-revenue-by-region-aggregaterevenue-region-data-regional_sales-sum."
+class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Use aggregate() to
+calculate total revenue by region: aggregate(revenue ~ region, data =
+regional_sales, sum).</h3>
+<pre class="r"><code>aggregate(revenue ~ region, data = regional_sales, sum)</code></pre>
+<pre><code>##   region revenue
+## 1   East  526000
+## 2  North  816250
+## 3  South  524000
+## 4   West  345000</code></pre>
+<p>Which region generated the highest total revenue across all
+quarters?</p>
+<p>North ($816250)</p>
+</div>
+<div
+id="calculate-average-customers-by-quarter-using-aggregatecustomers-quarter-data-regional_sales-mean."
+class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Calculate average
+customers by quarter using aggregate(customers ~ quarter, data =
+regional_sales, mean).</h3>
+<pre class="r"><code>aggregate(customers ~ quarter, data = regional_sales, mean)</code></pre>
+<pre><code>##   quarter customers
+## 1      Q1  411.2500
+## 2      Q2  452.5000
+## 3      Q3  456.2500
+## 4      Q4  482.3333</code></pre>
+<p>Which quarter shows the highest average customer count?</p>
+<p>Quarter 4 (482.333 customers)</p>
+<p>What business factors might explain this pattern?</p>
+<p>This constant rise in customer counts could mean the business is
+growing through marketing efforts, expansion and starting to gain a
+reputation and strong customer base.</p>
+</div>
+</div>
+<div id="question-5-executive-summary-creation" class="section level2"
+number="1.5">
+<h2><span class="header-section-number">1.5</span> Question 5: Executive
+Summary Creation</h2>
+<div
+id="create-a-comprehensive-business-summary-by-calculating-total-revenue-across-all-regions-and-quarters-average-revenue-per-quarter-and-the-number-of-high-performance-records-revenue-140000.-present-these-as-a-formatted-table-or-clear-summary."
+class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Create a
+comprehensive business summary by calculating: total revenue across all
+regions and quarters, average revenue per quarter, and the number of
+high-performance records (revenue &gt; $140,000). Present these as a
+formatted table or clear summary.</h3>
+<pre class="r"><code># Total revenue
+total_revenue &lt;- sum(regional_sales$revenue)
+
+# Average revenue per quarter
+avg_revenue_quarter &lt;- aggregate(revenue ~ quarter, data = regional_sales, mean)
+
+# Number of high-performance records (revenue &gt; 140000)
+n_high_perf &lt;- sum(regional_sales$revenue &gt; 140000)
+
+# Create a summary table
+business_summary &lt;- data.frame(
+  Metric = c(&quot;Total Revenue&quot;, 
+             paste(&quot;Average Revenue&quot;, avg_revenue_quarter$quarter, sep=&quot; - &quot;), 
+             &quot;High-Performance Records (Revenue &gt; $140,000)&quot;),
+  Value = c(total_revenue, round(avg_revenue_quarter$revenue, 2), n_high_perf)
+)
+
+# View summary table
+business_summary</code></pre>
+<pre><code>##                                          Metric   Value
+## 1                                 Total Revenue 2211250
+## 2                          Average Revenue - Q1  110000
+## 3                          Average Revenue - Q2  122250
+## 4                          Average Revenue - Q3  122750
+## 5                          Average Revenue - Q4  131875
+## 6 High-Performance Records (Revenue &gt; $140,000)       4</code></pre>
+</div>
+<div
+id="based-on-your-analysis-write-a-brief-business-recommendation-3-4-sentences-identifying-which-region-shows-the-most-consistent-performance-and-which-quarter-typically-shows-the-strongest-results.-support-your-recommendation-with-specific-numbers-from-your-analysis."
+class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Based on your
+analysis, write a brief business recommendation (3-4 sentences)
+identifying which region shows the most consistent performance and which
+quarter typically shows the strongest results. Support your
+recommendation with specific numbers from your analysis.</h3>
+<p>The North region shows the most consistent performance, with multiple
+high-revenue records including two Q4 entries above $155,000 and over
+575 customers each. Quarter 4 consistently generates the strongest
+results, with the highest average customer counts and several
+high-performance revenue records. It is recommended to focus marketing
+and operational resources on the North region during Q4 to maximize
+revenue, and consider applying successful Q4 strategies to other
+regions.</p>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

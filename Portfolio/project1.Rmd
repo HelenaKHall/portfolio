@@ -1,0 +1,121 @@
+
+---
+title: "Introduction to E-Business Analytics"
+subtitle: "Performance Metrics Report"
+author: "Helena Hall--665374757"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+# Executive Summary
+The Management 230 class with Johan Latulippe covers topics of website creation and making professional documents by using the program "R" and "RStudio". So far we have gone over Quiz 1 and learned the basic skills of creating a document using "Rmarkdown". We have written some code and used it to "knit" a professional document to use to analyse data, create charts, and nterpret statistics. These are all things we can use to analys data for a manager in our workplace.
+
+First, create your dataset using this code:
+
+```{r}
+max(# Create website performance dataset with business terminology
+webperfo <- data.frame(
+  engagement = airquality$Temp,
+  performance = airquality$Ozone,
+  server_load = airquality$Wind
+), na.rm = TRUE)
+```
+
+## Question 1
+
+### How many columns of data do you see, and what are their names? 
+There are 3 columns of data and the are named "engagement, performance, server_load"
+Why is it useful to see just the first few rows instead of printing all the data at once?
+You can see the pattern or if there are any mistakes easily.
+```{r}
+head(webperfo)
+```
+
+### Which variable has missing values (NA's)?
+Performance
+What does the summary tell you about the range of your engagement scores (minimum to maximum)?
+Min = 56.00, Max = 97.00
+```{r}
+summary(webperfo)
+```
+### Why might this number be important for a business manager planning website improvements?
+153 days of data could be useful information to a manager because it can let them know how reliable and representative the data is.
+```{r}
+nrow(webperfo)
+```
+
+### How does this compare to the median engagement shown in your summary?
+The max is NA and the median engagement is 79.00
+```{r}
+max(webperfo)
+```
+
+### Why did we need to add na.rm = TRUE here but not when finding the maximum engagement?
+Because if there are missing values we need to tell the computer to remove the missing values so it doesn't reply with "NA"
+```{r}
+max(webperfo$performance, na.rm = TRUE)
+```
+
+## Question 2
+
+### Looking at this plot, can you see a general pattern between engagement and performance?
+Yes, they both affect each other and as performance goes up, so does engagement
+What makes this plot difficult to understand for a business presentation?
+There are not many numbers of the axis and not very clear titles. We do not know what this plot is representing
+
+```{r}
+plot(webperfo$engagement, webperfo$performance)
+```
+
+### How do the title and axis labels make this plot more useful for a business audience?
+Multiple people can look at the data with less context and have it make sense. Also keeps things organized knowing which plots refer to what.
+
+```{r}
+plot(x = webperfo$engagement, y = webperfo$performance,
+     main = "User Engagement vs Website Performance",
+     xlab = "Daily User Engagement Score", 
+     ylab = "Website Performance Score",)
+```
+
+### What visual pattern do you now see between engagement and performance? Describe it in business terms.
+Both performance and engagement trend upwards and their relationship with each other becomes less constant as they increase in value.
+
+```{r}
+plot(x = webperfo$engagement, y = webperfo$performance,
+     main = "User Engagement vs Website Performance",
+     xlab = "Daily User Engagement Score", 
+     ylab = "Website Performance Score", 
+     pch = 16, 
+     col = "purple")
+```
+
+
+### What does the red trend line tell you? Is it going up, down, or staying flat as engagement increases?
+The red trend line is showing an upward trend in the scatter chart following the upward trend of the data.
+
+```{r}
+plot(x = webperfo$engagement, y = webperfo$performance,
+     main = "User Engagement vs Website Performance",
+     xlab = "Daily User Engagement Score", 
+     ylab = "Website Performance Score", 
+     pch = 16, 
+     col = "purple")
+abline(lm(performance ~ engagement, data = webperfo), 
+       col = "orange", lwd = 2)
+```
+
+## Question 3
+
+### What is the correlation coefficient? Is this a strong (above 0.7), moderate (0.3-0.7), or weak (below 0.3) relationship?
+This is a moderate relationship. "0.69" correlation
+
+```{r}
+cor(webperfo$engagement, webperfo$performance, use = "complete.obs")
+```
+
+### Based on your analysis, when engagement is high, what typically happens to website performance? What should an e-business manager do with this information?
+When engagement is high, website performance improves, which is shown by the positive correlation of 0.69. This means that using better content to encourage user-engagement,improves overall performance. An e-business manager should prioritize strategies that drive engagement beacuse it would improve the website performance as well.
