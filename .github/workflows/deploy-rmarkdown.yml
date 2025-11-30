@@ -30,10 +30,10 @@ jobs:
         shell: Rscript {0}
       
       - name: Render R Markdown site
-       run: |
-          set -e
-          cd portfolio
-          rmarkdown::render_site(encoding = 'UTF-8')
+        run: |
+            set -e
+            cd portfolio
+            rmarkdown::render_site(encoding = 'UTF-8')
         shell: Rscript {0}
       
       - name: Setup Pages
