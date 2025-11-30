@@ -5,6 +5,9 @@ title: "Welcome to My Portfolio"
 
 ## Hello and Welcome!
 
+My portfolio website showcases my projects, skills, and personal background. It includes a Home page with an introduction, an About page detailing my experience and goals, and a Projects page highlighting key work with descriptions and visuals. The site features clear navigation links, responsive design, and interactive elements, making it easy for visitors to explore my work and learn about my abilities. It serves as a professional, organized, and user-friendly showcase of my achievements.
+
+
 I'm Helena, and this is my portfolio. Here you'll find 
 projects showcasing my skills in:
 
