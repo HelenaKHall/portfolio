@@ -31,9 +31,7 @@ jobs:
       
       - name: Render R Markdown site
         run: |
-            set -e
-            cd portfolio
-            rmarkdown::render_site(encoding = 'UTF-8')
+           rmarkdown::render_site(input = "portfolio", encoding = "UTF-8")
         shell: Rscript {0}
       
       - name: Setup Pages
