@@ -33,7 +33,7 @@ jobs:
         run: |
           rmarkdown::render_site(encoding = 'UTF-8')
         shell: Rscript {0}
-        working-directory: ./portfolio
+        working-directory: portfolio
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
