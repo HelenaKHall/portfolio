@@ -31,7 +31,7 @@ jobs:
       
       - name: Render R Markdown site
         run: |
-           rmarkdown::render_site(input = "portfolio", encoding = "UTF-8")
+           rmarkdown::render_site(input = "Portfolio", encoding = "UTF-8")
         shell: Rscript {0}
       
       - name: Setup Pages
@@ -40,7 +40,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: Portfolio/docs
       
       - name: Deploy to GitHub Pages
         id: deployment
